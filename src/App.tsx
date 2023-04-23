@@ -1,5 +1,5 @@
-const App = () => (
-	<h1 className="text-3xl font-bold underline">Hello world!</h1>
-);
+import { Layout } from './components/Layout';
+
+const App = () => <Layout />;
 
 export default App;
