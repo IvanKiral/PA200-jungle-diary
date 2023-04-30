@@ -13,6 +13,7 @@ import { About } from './pages/About.tsx';
 import { Plants } from './pages/Plants.tsx';
 import { Calendar } from './pages/Calendar.tsx';
 import { PlantDetail } from './pages/PlantDetails.tsx';
+import { Login } from './pages/Login.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 				element: <Calendar />
 			}
 		]
+	},
+	{
+		path: '/login',
+		element: <Login />
 	}
 ]);
 
