@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const FlowerLogo: FC = () => (
@@ -58,24 +59,33 @@ export const NavBar: FC = () => {
 			>
 				<ul className="flex flex-col gap-8 md:gap-3 pt-12 md:pt-6 h-full items-center auto-rows-min">
 					<li className="text-emerald-500">
-						<a href="#" className="text-xl md:text-lg hover:text-emerald-400">
+						<Link to="" className="text-xl md:text-lg hover:text-emerald-400">
 							Home
-						</a>
+						</Link>
 					</li>
 					<li className="text-emerald-500">
-						<a href="#" className="text-xl md:text-lg hover:text-emerald-400">
+						<Link
+							to="about"
+							className="text-xl md:text-lg hover:text-emerald-400"
+						>
 							About
-						</a>
+						</Link>
 					</li>
 					<li className="text-emerald-500">
-						<a href="#" className="text-xl md:text-lg hover:text-emerald-400">
+						<Link
+							to="plants"
+							className="text-xl md:text-lg hover:text-emerald-400"
+						>
 							Flowers
-						</a>
+						</Link>
 					</li>
 					<li className="text-emerald-500">
-						<a href="#" className="text-xl md:text-lg hover:text-emerald-400">
+						<Link
+							to="calendar"
+							className="text-xl md:text-lg hover:text-emerald-400"
+						>
 							Calendar
-						</a>
+						</Link>
 					</li>
 					<span className="grow" />
 					<li className="text-emerald-500 ">
