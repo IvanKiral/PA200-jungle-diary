@@ -1,6 +1,8 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { signOut } from '../firestore';
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const FlowerLogo: FC = () => (
 	<svg
@@ -90,7 +92,8 @@ export const NavBar: FC = () => {
 					<span className="grow" />
 					<li className="text-emerald-500 ">
 						<a
-							href="#"
+							href=""
+							onClick={() => signOut()}
 							className="text-xl md:text-lg hover:text-emerald-400 self-end"
 						>
 							Logout
