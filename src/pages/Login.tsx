@@ -62,7 +62,10 @@ export const Login: FC = () => {
 
 				<p
 					className="text-green-600 self-center hover:text-green-500 cursor-pointer"
-					onClick={() => setRegister(prev => !prev)}
+					onClick={() => {
+						setError('');
+						setRegister(prev => !prev);
+					}}
 				>
 					{register
 						? 'Already have an account? Log in'
