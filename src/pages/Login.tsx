@@ -31,7 +31,7 @@ export const Login: FC = () => {
 	return (
 		<div className="bg-emerald-500 h-screen w-screen flex justify-center items-center">
 			<form
-				className="bg-gray-100 w-3/4 md:w-2/4 xl:w-1/4 rounded-lg shadow-lg p-4 flex flex-col gap-4 "
+				className="bg-gray-100 w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6 rounded-lg shadow-lg p-4 flex flex-col gap-4 "
 				onSubmit={handleSubmit}
 			>
 				<h1 className="text-2xl text-green-600">
