@@ -14,6 +14,7 @@ import { Plants } from './pages/Plants.tsx';
 import { Calendar } from './pages/Calendar.tsx';
 import { PlantDetail } from './pages/PlantDetails.tsx';
 import { Login } from './pages/Login.tsx';
+import { UserProvider } from './hooks/useUser.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -51,6 +52,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<UserProvider>
+			<RouterProvider router={router} />
+		</UserProvider>
 	</React.StrictMode>
 );
