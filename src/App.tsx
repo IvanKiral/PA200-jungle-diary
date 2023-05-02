@@ -6,7 +6,11 @@ import { useUser } from './hooks/useUser';
 const App = () => {
 	const user = useUser();
 
-	if (!user) {
+	if (user === undefined) {
+		return <div />;
+	}
+
+	if (user === null) {
 		return <Navigate to="/login" />;
 	}
 

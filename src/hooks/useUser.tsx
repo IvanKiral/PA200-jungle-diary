@@ -10,15 +10,15 @@ import {
 
 import { onAuthChanged } from '../firestore';
 
-const UserContext = createContext<User | undefined>(undefined as never);
+const UserContext = createContext<User | undefined | null>(undefined as never);
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [user, setUser] = useState<User | undefined>(undefined);
+	const [user, setUser] = useState<User | null>();
 
 	useEffect(() => {
-		onAuthChanged(u => setUser(u ?? undefined));
+		onAuthChanged(u => setUser(u ?? null));
 	}, []);
 
 	return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
