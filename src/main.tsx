@@ -11,7 +11,7 @@ import './index.css';
 import { Home } from './pages/Home.tsx';
 import { About } from './pages/About.tsx';
 import { Plants } from './pages/Plants.tsx';
-import { Calendar } from './pages/Calendar.tsx';
+import { CalendarPage } from './pages/CalendarPage.tsx';
 import { PlantDetail } from './pages/PlantDetails.tsx';
 import { Login } from './pages/Login.tsx';
 import { UserProvider } from './hooks/useUser.tsx';
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'calendar',
-				element: <Calendar />
+				element: <CalendarPage />
 			}
 		]
 	},
