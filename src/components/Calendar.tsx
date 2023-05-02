@@ -4,6 +4,9 @@ import { FC } from 'react';
 import { months, daysInWeek } from '../utils/dateUtils';
 
 import { ArrowIcon } from './icons/ArrowIcon';
+import { FertilizeIcon } from './icons/FertilizeIcon';
+import { WaterIcon } from './icons/WaterIcon';
+import { PlantPotIcon } from './icons/PlantPotIcon';
 
 type ReminderType = 'water' | 'fertilize' | 'repot';
 
@@ -74,24 +77,27 @@ export const Calendar: FC<CalendarProps> = ({
 						{tasks.water.map(task => (
 							<div
 								key={`water-${day}-${task}`}
-								className="bg-blue-300 rounded-sm mb-[2px] text-blue-900 truncate ps-2"
+								className="bg-blue-300 rounded-sm mb-[2px] text-blue-900 truncate ps-1 flex flex-row items-center gap-1"
 							>
+								<WaterIcon className="w-5 h-5 fill-blue-900" />
 								{task}
 							</div>
 						))}
 						{tasks.repot.map(task => (
 							<div
 								key={`repot-${day}-${task}`}
-								className="bg-amber-200 rounded-sm mb-[2px] text-yellow-700 truncate ps-2"
+								className="bg-amber-200 rounded-sm mb-[2px] text-yellow-700 truncate ps-1 flex flex-row items-center gap-1"
 							>
+								<PlantPotIcon className="w-5 h-5 fill-yellow-700" />
 								{task}
 							</div>
 						))}
 						{tasks.fertilize.map(task => (
 							<div
 								key={`fertilize-${day}-${task}`}
-								className="bg-red-300 rounded-sm mb-[2px] text-red-700 truncate ps-2"
+								className="bg-red-300 rounded-sm mb-[2px] text-red-700 truncate ps-1 flex flex-row items-center gap-1"
 							>
+								<FertilizeIcon className="w-5 h-5 fill-red-700" />
 								{task}
 							</div>
 						))}
