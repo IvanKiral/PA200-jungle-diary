@@ -11,7 +11,7 @@ export type PlantType = {
 export const examplePlants: PlantType[] = [
 	{
 		name: 'kvietocek',
-		nextWater: '2023-05-03',
+		nextWater: '2023-05-05',
 		waterInterval: 5,
 		nextRepot: '2023-05-06',
 		repotInterval: 7,
@@ -20,7 +20,7 @@ export const examplePlants: PlantType[] = [
 	},
 	{
 		name: 'muchotravka',
-		nextWater: '2023-05-03',
+		nextWater: '2023-05-05',
 		waterInterval: 7,
 		nextRepot: '2023-05-06',
 		repotInterval: 7,
