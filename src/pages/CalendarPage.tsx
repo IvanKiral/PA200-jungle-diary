@@ -3,12 +3,10 @@ import { FC, useCallback, useMemo, useState } from 'react';
 
 import { Calendar } from '../components/Calendar';
 import { examplePlants } from '../fakeData/FakePlants';
+import { range } from '../utils/listUtils';
 
 export const CalendarPage: FC = () => {
 	const [selectedDate, setSelectedDate] = useState(dayjs().startOf('day'));
-
-	const range = (start: number, end: number) =>
-		Array.from(new Array(end - start + 1)).map((_, i) => i + start);
 
 	const getDaysToDisplay = useCallback(() => {
 		const previousMonth = selectedDate.subtract(1, 'month');
@@ -74,10 +72,13 @@ export const CalendarPage: FC = () => {
 
 	const calculateReminders = useCallback(() => {
 		const currentDate = dayjs();
-		const c = getDaysToDisplay();
+		const result = getDaysToDisplay();
 
-		if (selectedDate.month() < currentDate.month()) {
-			return c;
+		if (
+			selectedDate.month() < currentDate.month() &&
+			selectedDate.year() <= currentDate.year()
+		) {
+			return result;
 		}
 
 		examplePlants.map(plant => {
@@ -87,7 +88,7 @@ export const CalendarPage: FC = () => {
 
 			if (nextWaterDate.unix() < currentDate.unix()) {
 				if (selectedDate.month() === nextWaterDate.month()) {
-					c.thisMonthRange[currentDate.date()].water.push(plant.name);
+					result.thisMonthRange[currentDate.date()].water.push(plant.name);
 				}
 			} else {
 				const interval_start = calculate_interval_start(
@@ -99,12 +100,12 @@ export const CalendarPage: FC = () => {
 					interval_start.date(),
 					endOfSelectedMonth.date(),
 					plant.waterInterval
-				).map(i => c.thisMonthRange[i].water.push(plant.name));
+				).map(i => result.thisMonthRange[i].water.push(plant.name));
 			}
 
 			if (nextFertilizeDate.unix() < currentDate.unix()) {
 				if (selectedDate.month() === nextFertilizeDate.month()) {
-					c.thisMonthRange[currentDate.date()].fertilize.push(plant.name);
+					result.thisMonthRange[currentDate.date()].fertilize.push(plant.name);
 				}
 			} else {
 				const interval_start = calculate_interval_start(
@@ -116,12 +117,12 @@ export const CalendarPage: FC = () => {
 					interval_start.date(),
 					endOfSelectedMonth.date(),
 					plant.fertilizeInterval
-				).map(i => c.thisMonthRange[i].fertilize.push(plant.name));
+				).map(i => result.thisMonthRange[i].fertilize.push(plant.name));
 			}
 
 			if (nextRepotDate.unix() < currentDate.unix()) {
 				if (selectedDate.month() === nextRepotDate.month()) {
-					c.thisMonthRange[currentDate.date()].repot.push(plant.name);
+					result.thisMonthRange[currentDate.date()].repot.push(plant.name);
 				}
 			} else {
 				const interval_start = calculate_interval_start(
@@ -133,13 +134,13 @@ export const CalendarPage: FC = () => {
 					interval_start.date(),
 					endOfSelectedMonth.date(),
 					plant.repotInterval
-				).map(i => c.thisMonthRange[i].repot.push(plant.name));
+				).map(i => result.thisMonthRange[i].repot.push(plant.name));
 			}
 		});
-		return c;
+		return result;
 	}, [selectedDate, getDaysToDisplay, calculate_interval_start]);
 
-	const c = useMemo(
+	const calendarDaysWithReminders = useMemo(
 		() => calculateReminders(),
 		[selectedDate, calculateReminders]
 	);
@@ -149,9 +150,9 @@ export const CalendarPage: FC = () => {
 			<Calendar
 				selectedDate={selectedDate}
 				setSelectedDate={date => setSelectedDate(date)}
-				previousMonthDays={c.previousMonthDays}
-				currentMonthDays={c.thisMonthRange}
-				nextMonthDays={c.nextMonthDays}
+				previousMonthDays={calendarDaysWithReminders.previousMonthDays}
+				currentMonthDays={calendarDaysWithReminders.thisMonthRange}
+				nextMonthDays={calendarDaysWithReminders.nextMonthDays}
 			/>
 		</div>
 	);
