@@ -1,10 +1,5 @@
 import { FC, ReactElement } from 'react';
-import {
-	parseISO,
-	differenceInDays,
-	differenceInWeeks,
-	differenceInMonths
-} from 'date-fns';
+import dayjs from 'dayjs';
 
 import { PlantType } from '../types/PlantType';
 
@@ -17,35 +12,36 @@ type PlantCardProps = {
 };
 
 const formatDate = (date: string) => {
-	const targetDate = parseISO(date);
-	const currentDate = new Date();
+	const targetDate = dayjs(date);
+	const currentDate = dayjs();
 
-	const daysDiff = differenceInDays(targetDate, currentDate) + 1;
+	const daysDiff = targetDate.diff(currentDate, 'day') + 1;
 	if (daysDiff < 0) {
 		// Target date has already passed
 		return 'Overdue!';
-	} else if (daysDiff === 0) {
+	}
+	if (daysDiff === 0) {
 		return 'Today!';
-	} else if (daysDiff <= 7) {
+	}
+	if (daysDiff <= 7) {
 		// Target date is less than or equal to 7 days away
 		const daysLabel = daysDiff === 1 ? 'day' : 'days';
 		return `in ${daysDiff} ${daysLabel}`;
-	} else {
-		// Target date is more than 7 days away
-		const weeksDiff = differenceInWeeks(targetDate, currentDate);
-		const monthsDiff = differenceInMonths(targetDate, currentDate);
+	}
+	// Target date is more than 7 days away
+	const weeksDiff = targetDate.diff(currentDate, 'week');
+	const monthsDiff = targetDate.diff(currentDate, 'month');
 
-		if (monthsDiff >= 1) {
-			// Target date is more than 1 month away
-			return `in ${monthsDiff} month${monthsDiff > 1 ? 's' : ''}, ${
-				weeksDiff % 4
-			} week${weeksDiff % 4 > 1 ? 's' : ''}`;
-		} else {
-			// Target date is more than 1 week away but less than 1 month away
-			return `in ${weeksDiff} week${weeksDiff > 1 ? 's' : ''}, ${
-				daysDiff % 7
-			} day${daysDiff % 7 > 1 ? 's' : ''}`;
-		}
+	if (monthsDiff >= 1) {
+		// Target date is more than 1 month away
+		return `in ${monthsDiff} month${monthsDiff > 1 ? 's' : ''}, ${
+			weeksDiff % 4
+		} week${weeksDiff % 4 > 1 ? 's' : ''}`;
+	} else {
+		// Target date is more than 1 week away but less than 1 month away
+		return `in ${weeksDiff} week${weeksDiff > 1 ? 's' : ''}, ${
+			daysDiff % 7
+		} day${daysDiff % 7 > 1 ? 's' : ''}`;
 	}
 };
 
