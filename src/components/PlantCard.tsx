@@ -1,11 +1,9 @@
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 import dayjs from 'dayjs';
 
 import { PlantType } from '../types/PlantType';
 
-import { FertilizeIcon } from './icons/FertilizeIcon';
-import { PlantPotIcon } from './icons/PlantPotIcon';
-import { WaterIcon } from './icons/WaterIcon';
+import { TaskFlag } from './TaskFlag';
 
 type PlantCardProps = {
 	plant: PlantType;
@@ -45,22 +43,6 @@ const formatDate = (date: string) => {
 	}
 };
 
-const renderRemainder = (
-	name: string,
-	next: string,
-	backGroundColor: string,
-	textColor: string,
-	icon: ReactElement
-) => (
-	<div
-		key={`water-${next}-${name}`}
-		className={`${backGroundColor} ${textColor} flex justify-center text-center rounded-sm mb-[2px] truncate flex flex-row items-center gap-1"`}
-	>
-		{icon}
-		{formatDate(next)}
-	</div>
-);
-
 export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 	<div
 		key={plant.name}
@@ -85,27 +67,21 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 				{plant.name}
 			</h5>
 			<div className="p-5">
-				{renderRemainder(
-					plant.name,
-					plant.nextWater,
-					'bg-blue-300',
-					'text-blue-900',
-					<WaterIcon className="w-5 h-5 fill-blue-900" />
-				)}
-				{renderRemainder(
-					plant.name,
-					plant.nextRepot,
-					'bg-amber-200',
-					'text-yellow-700',
-					<PlantPotIcon className="w-5 h-5 fill-yellow-700" />
-				)}
-				{renderRemainder(
-					plant.name,
-					plant.nextFertilize,
-					'bg-red-300',
-					'text-red-700',
-					<FertilizeIcon className="w-5 h-5 fill-red-700" />
-				)}
+				<TaskFlag
+					type="water"
+					text={formatDate(plant.nextWater)}
+					extraClasses="flex justify-center text-center"
+				/>
+				<TaskFlag
+					type="fertilize"
+					text={formatDate(plant.nextFertilize)}
+					extraClasses="flex justify-center text-center"
+				/>
+				<TaskFlag
+					type="repot"
+					text={formatDate(plant.nextRepot)}
+					extraClasses="flex justify-center text-center"
+				/>
 			</div>
 			<button
 				type="button"

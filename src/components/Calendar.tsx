@@ -4,9 +4,7 @@ import { FC, ReactElement } from 'react';
 import { months, daysInWeek } from '../utils/dateUtils';
 
 import { ArrowIcon } from './icons/ArrowIcon';
-import { FertilizeIcon } from './icons/FertilizeIcon';
-import { WaterIcon } from './icons/WaterIcon';
-import { PlantPotIcon } from './icons/PlantPotIcon';
+import { TaskFlag } from './TaskFlag';
 
 type ReminderType = 'water' | 'fertilize' | 'repot';
 
@@ -47,22 +45,6 @@ export const Calendar: FC<CalendarProps> = ({
 		>
 			{icon}
 		</button>
-	);
-
-	const renderRemainder = (
-		plantName: string,
-		day: string,
-		backGroundColor: string,
-		textColor: string,
-		icon: ReactElement
-	) => (
-		<div
-			key={`water-${day}-${plantName}`}
-			className={`${backGroundColor} ${textColor} rounded-sm mb-[2px] truncate ps-1 flex flex-row items-center gap-1"`}
-		>
-			{icon}
-			{plantName}
-		</div>
 	);
 
 	return (
@@ -107,33 +89,27 @@ export const Calendar: FC<CalendarProps> = ({
 						</div>
 
 						<div className="pt-1">
-							{tasks.water.map(plantName =>
-								renderRemainder(
-									plantName,
-									day,
-									'bg-blue-300',
-									'text-blue-900',
-									<WaterIcon className="w-5 h-5 fill-blue-900" />
-								)
-							)}
-							{tasks.repot.map(plantName =>
-								renderRemainder(
-									plantName,
-									day,
-									'bg-amber-200',
-									'text-yellow-700',
-									<PlantPotIcon className="w-5 h-5 fill-yellow-700" />
-								)
-							)}
-							{tasks.fertilize.map(plantName =>
-								renderRemainder(
-									plantName,
-									day,
-									'bg-red-300',
-									'text-red-700',
-									<FertilizeIcon className="w-5 h-5 fill-red-700" />
-								)
-							)}
+							{tasks.water.map(plantName => (
+								<TaskFlag
+									key={`${plantName}-${day}`}
+									type="water"
+									text={plantName}
+								/>
+							))}
+							{tasks.repot.map(plantName => (
+								<TaskFlag
+									key={`${plantName}-${day}`}
+									type="repot"
+									text={plantName}
+								/>
+							))}
+							{tasks.fertilize.map(plantName => (
+								<TaskFlag
+									key={`${plantName}-${day}`}
+									type="fertilize"
+									text={plantName}
+								/>
+							))}
 						</div>
 					</div>
 				))}
