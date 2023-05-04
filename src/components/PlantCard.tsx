@@ -13,7 +13,8 @@ const formatDate = (date: string) => {
 	const targetDate = dayjs(date);
 	const currentDate = dayjs();
 
-	const daysDiff = targetDate.diff(currentDate, 'day') + 1;
+	const daysDiff = targetDate.diff(currentDate, 'day');
+	console.log(daysDiff);
 	if (daysDiff < 0) {
 		// Target date has already passed
 		return 'Overdue!';
@@ -21,26 +22,12 @@ const formatDate = (date: string) => {
 	if (daysDiff === 0) {
 		return 'Today!';
 	}
-	if (daysDiff <= 7) {
+	if (daysDiff <= 15) {
 		// Target date is less than or equal to 7 days away
-		const daysLabel = daysDiff === 1 ? 'day' : 'days';
-		return `in ${daysDiff} ${daysLabel}`;
+		return `in ${daysDiff} day${daysDiff === 1 ? '' : 's'}`;
 	}
-	// Target date is more than 7 days away
-	const weeksDiff = targetDate.diff(currentDate, 'week');
-	const monthsDiff = targetDate.diff(currentDate, 'month');
 
-	if (monthsDiff >= 1) {
-		// Target date is more than 1 month away
-		return `in ${monthsDiff} month${monthsDiff > 1 ? 's' : ''}, ${
-			weeksDiff % 4
-		} week${weeksDiff % 4 > 1 ? 's' : ''}`;
-	} else {
-		// Target date is more than 1 week away but less than 1 month away
-		return `in ${weeksDiff} week${weeksDiff > 1 ? 's' : ''}, ${
-			daysDiff % 7
-		} day${daysDiff % 7 > 1 ? 's' : ''}`;
-	}
+	return targetDate.format('DD-MM-YYYY');
 };
 
 export const PlantCard: FC<PlantCardProps> = ({ plant }) => (

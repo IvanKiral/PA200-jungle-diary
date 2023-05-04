@@ -22,7 +22,7 @@ export const TaskFlag: FC<TaskFlagProps> = props => {
 	}
 	return (
 		<div
-			className={`${styles} rounded-sm mb-[2px] truncate ps-1 flex flex-row items-center gap-1"`}
+			className={`${styles} ${props.extraClasses} rounded-sm mb-[2px] truncate ps-1 flex flex-row items-center gap-1"`}
 		>
 			{icon}
 			{props.text}
