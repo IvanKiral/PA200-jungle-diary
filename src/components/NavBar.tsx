@@ -57,7 +57,7 @@ export const NavBar: FC = () => {
 				id="navbar"
 				className={`absolute top-16 ${
 					!isToggled && 'hidden'
-				} md:relative md:top-0 md:block md:h-full md:opacity-100 w-full opacity-60 bg-emerald-100 pb-8 md:pb-4`}
+				} md:relative md:top-0 md:block md:h-full md:opacity-100 w-full bg-emerald-100 pb-8 md:pb-4`}
 			>
 				<ul className="flex flex-col gap-8 md:gap-3 pt-12 md:pt-6 h-full items-center auto-rows-min">
 					<li className="text-emerald-500">
@@ -78,7 +78,7 @@ export const NavBar: FC = () => {
 							to="plants"
 							className="text-xl md:text-lg hover:text-emerald-400"
 						>
-							Flowers
+							Plants
 						</Link>
 					</li>
 					<li className="text-emerald-500">
