@@ -21,14 +21,14 @@ export const Plants: FC = () => {
 
 	useEffect(() => {
 		const fetchUserPlants = async () => {
-			if (user !== null && user !== undefined) {
+			if (user) {
 				const plants = await getUserPlants(user.email as string);
 				setUserPlants(plants);
 			}
 		};
 		fetchUserPlants();
 	}, [user]);
-	if (user === null || user === undefined) {
+	if (!user) {
 		return null;
 	}
 
