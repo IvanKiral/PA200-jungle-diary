@@ -14,7 +14,6 @@ const formatDate = (date: string) => {
 	const currentDate = dayjs();
 
 	const daysDiff = targetDate.diff(currentDate, 'day');
-	console.log(daysDiff);
 	if (daysDiff < 0) {
 		// Target date has already passed
 		return 'Overdue!';

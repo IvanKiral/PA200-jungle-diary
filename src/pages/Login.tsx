@@ -17,7 +17,6 @@ export const Login: FC = () => {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		console.log(email);
 		try {
 			register ? await signUp(email, password) : await signIn(email, password);
 			navigate('/');
