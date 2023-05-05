@@ -7,6 +7,7 @@ import {
 	onAuthStateChanged,
 	User
 } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 export const firebaseConfig = {
 	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,7 +18,7 @@ export const firebaseConfig = {
 	appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 
@@ -36,5 +37,4 @@ export const signOut = () => authSignOut(auth);
 export const onAuthChanged = (callback: (u: User | null) => void) =>
 	onAuthStateChanged(auth, callback);
 
-// Firestore
-// const db = getFirestore();
+export const db = getFirestore(app);
