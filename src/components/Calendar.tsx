@@ -91,21 +91,21 @@ export const Calendar: FC<CalendarProps> = ({
 						<div className="pt-1">
 							{tasks.water.map(plantName => (
 								<TaskFlag
-									key={`${plantName}-${day}`}
+									key={`water-${plantName}-${day}`}
 									type="water"
 									text={plantName}
 								/>
 							))}
 							{tasks.repot.map(plantName => (
 								<TaskFlag
-									key={`${plantName}-${day}`}
+									key={`repot-${plantName}-${day}`}
 									type="repot"
 									text={plantName}
 								/>
 							))}
 							{tasks.fertilize.map(plantName => (
 								<TaskFlag
-									key={`${plantName}-${day}`}
+									key={`fertilize-${plantName}-${day}`}
 									type="fertilize"
 									text={plantName}
 								/>
