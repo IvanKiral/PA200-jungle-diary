@@ -1,12 +1,26 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Calendar } from '../components/Calendar';
-import { examplePlants } from '../fakeData/FakePlants';
 import { range } from '../utils/listUtils';
+import { useUser } from '../hooks/useUser';
+import { PlantType } from '../types/PlantType';
+import { fetchUserPlants } from '../repository/fetchUserPlants';
 
 export const CalendarPage: FC = () => {
 	const [selectedDate, setSelectedDate] = useState(dayjs().startOf('day'));
+	const user = useUser();
+	const [userPlants, setUserPlants] = useState<PlantType[]>([]);
+
+	useEffect(() => {
+		const getUserPlants = async () => {
+			if (user) {
+				const plants = await fetchUserPlants(user.email as string);
+				setUserPlants(plants);
+			}
+		};
+		getUserPlants();
+	}, [user]);
 
 	const getDaysToDisplay = useCallback(() => {
 		const previousMonth = selectedDate.subtract(1, 'month');
@@ -81,7 +95,7 @@ export const CalendarPage: FC = () => {
 			return result;
 		}
 
-		examplePlants.map(plant => {
+		userPlants.map(plant => {
 			const nextWaterDate = dayjs(plant.nextWater);
 			const nextFertilizeDate = dayjs(plant.nextFertilize);
 			const nextRepotDate = dayjs(plant.nextRepot);
@@ -138,7 +152,7 @@ export const CalendarPage: FC = () => {
 			}
 		});
 		return result;
-	}, [selectedDate, getDaysToDisplay, calculate_interval_start]);
+	}, [selectedDate, getDaysToDisplay, calculate_interval_start, userPlants]);
 
 	const calendarDaysWithReminders = useMemo(
 		() => calculateReminders(),
