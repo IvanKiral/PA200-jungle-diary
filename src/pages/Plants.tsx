@@ -1,33 +1,24 @@
 import { FC, useEffect, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
 
 import { PlantCard } from '../components/PlantCard';
 import { useUser } from '../hooks/useUser';
-import { db } from '../firestore';
 import { PlantType } from '../types/PlantType';
-
-const getUserPlants = async (email: string) => {
-	const q = query(collection(db, 'plants'), where('userEmail', '==', email));
-
-	const querySnapshot = await getDocs(q);
-	const plantData = querySnapshot.docs.map(doc => doc.data() as PlantType);
-
-	return plantData;
-};
+import { fetchUserPlants } from '../repository/fetchUserPlants';
 
 export const Plants: FC = () => {
 	const user = useUser();
 	const [userPlants, setUserPlants] = useState<PlantType[]>([]);
 
 	useEffect(() => {
-		const fetchUserPlants = async () => {
+		const getUserPlants = async () => {
 			if (user) {
-				const plants = await getUserPlants(user.email as string);
+				const plants = await fetchUserPlants(user.email as string);
 				setUserPlants(plants);
 			}
 		};
-		fetchUserPlants();
+		getUserPlants();
 	}, [user]);
+
 	if (!user) {
 		return null;
 	}
