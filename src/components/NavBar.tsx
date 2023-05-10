@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { signOut } from '../firestore';
 
+import { Toggle } from './Toggle';
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const FlowerLogo: FC = () => (
 	<svg
@@ -89,6 +91,7 @@ export const NavBar: FC = () => {
 							Calendar
 						</Link>
 					</li>
+					<Toggle text="Dark mode" />
 					<span className="grow" />
 					<li className="text-white ">
 						<a
