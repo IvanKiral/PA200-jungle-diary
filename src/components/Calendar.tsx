@@ -31,7 +31,7 @@ export const Calendar: FC<CalendarProps> = ({
 	const renderDisabledCalendarWindow = (day: number, month: number) => (
 		<div
 			key={`${month}-${day}`}
-			className="border min-h-[124px] p-1 bg-gray-100 cursor-not-allowed"
+			className="border min-h-[124px] p-1 bg-gray-100 dark:bg-slate-700 cursor-not-allowed"
 		>
 			<p>{day}</p>
 		</div>
