@@ -59,7 +59,7 @@ export const NavBar: FC = () => {
 				id="navbar"
 				className={`fixed top-16 ${
 					!isToggled && 'hidden'
-				} md:relative md:top-0 md:block md:h-full md:opacity-100 w-full bg-emerald-200 md:bg-emerald-500 -z-10 pb-8 md:pb-4`}
+				} md:relative md:top-0 md:block md:h-full md:opacity-100 w-full bg-emerald-400 md:bg-emerald-500 -z-10 pb-8 md:pb-4`}
 			>
 				<ul className="flex flex-col gap-8 md:gap-3 pt-12 md:pt-6 h-full items-center auto-rows-min">
 					<li className="text-white">
