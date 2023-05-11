@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import dayjs from 'dayjs';
 
-import { PlantType } from '../types/PlantType';
+import { PlantType } from '../types';
 
 import { TaskFlag } from './TaskFlag';
 
@@ -35,18 +35,15 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 		className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 z-0"
 	>
 		<div
-			className="relative overflow-hidden bg-cover bg-no-repeat first-letter"
+			className="relative overflow-hidden bg-cover bg-no-repeat h-52"
 			data-te-ripple-init
 			data-te-ripple-color="light"
 		>
 			<img
-				className="rounded-t-lg"
-				src="https://images.unsplash.com/photo-1619423089884-bc5b70bc4e2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+				className="rounded-t-lg object-cover h-full w-full"
+				src={plant.image}
 				alt=""
 			/>
-			<a href="#!">
-				<div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100" />
-			</a>
 		</div>
 		<div className="p-6 flex flex-col content-center justify-center">
 			<h5 className="mb-2 text-xl text-center font-medium text-neutral-800 dark:text-neutral-50">
