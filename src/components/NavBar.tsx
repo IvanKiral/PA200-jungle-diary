@@ -95,6 +95,7 @@ export const NavBar: FC = () => {
 						</Link>
 					</li>
 					<span className="grow" />
+					<Toggle text="Dark Mode" />
 					<li className="text-white ">
 						<a
 							href=""
