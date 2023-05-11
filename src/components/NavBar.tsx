@@ -94,7 +94,6 @@ export const NavBar: FC = () => {
 							Calendar
 						</Link>
 					</li>
-					<Toggle text="Dark mode" />
 					<span className="grow" />
 					<li className="text-white ">
 						<a
