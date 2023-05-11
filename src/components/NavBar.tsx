@@ -72,14 +72,6 @@ export const NavBar: FC = () => {
 					</li>
 					<li className="text-white">
 						<Link
-							to="about"
-							className="text-xl md:text-lg hover:text-emerald-400 dark:hover:text-emerald-500"
-						>
-							About
-						</Link>
-					</li>
-					<li className="text-white">
-						<Link
 							to="plants"
 							className="text-xl md:text-lg hover:text-emerald-400 dark:hover:text-emerald-500"
 						>
