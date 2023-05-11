@@ -2,35 +2,34 @@ import dayjs from 'dayjs';
 import { any, date, number, object, string } from 'zod';
 
 const today = dayjs().format('YYYY-MM-DD');
-const validExtensions = ['.jpg', '.jpeg', '.png'];
 
 const createIntervalSchema = (min: number, max: number, unit: string) =>
-	number()
-		.min(min, `Interval should be between ${min} and ${max} ${unit}.`)
-		.max(max, `Interval should be between ${min} and ${max} ${unit}.`);
+	string()
+		.nonempty('Interval is required.')
+		.transform(value => Number(value))
+		.refine(
+			value => value >= min && value <= max,
+			`Interval should be between ${min} and ${max} ${unit}.`
+		);
 
-const createDateSchema = (minDate: string) =>
-	date()
-		.min(new Date(minDate), { message: 'This plant would be already dead.' })
-		.max(new Date(today), {
+const createDateSchema = () =>
+	string().refine(
+		date =>
+			dayjs(date).isBefore(dayjs(today)) || dayjs(date).isSame(dayjs(today)),
+		{
 			message: 'Time travel has not yet been invented.'
-		});
-
-const createImageSchema = () =>
-	any().refine(
-		file => validExtensions.includes(file?.type),
-		`Only ${validExtensions.join(', ')} formats are supported.`
+		}
 	);
 
-const plantSchema = object({
+export const plantSchema = object({
 	name: string()
 		.nonempty('Name is required.')
 		.max(50, 'Name can be at most 50 characters long.'),
-	image: createImageSchema().optional(),
-	lastWatered: createDateSchema('2023-01-01'),
-	lastFertilized: createDateSchema('2023-01-01'),
-	lastRepotted: createDateSchema('2023-01-01'),
-	wateringInterval: createIntervalSchema(3, 21, 'days'),
-	fertilizingInterval: createIntervalSchema(2, 10, 'weeks'),
-	repottingInterval: createIntervalSchema(1, 5, 'years')
+	image: any().optional(),
+	lastWater: createDateSchema(),
+	lastFertilize: createDateSchema(),
+	lastRepot: createDateSchema(),
+	waterInterval: createIntervalSchema(3, 21, 'days'),
+	fertilizeInterval: createIntervalSchema(2, 10, 'weeks'),
+	repotInterval: createIntervalSchema(1, 5, 'years')
 }).required();
