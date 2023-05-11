@@ -1,8 +1,12 @@
-import { PlantType } from '../types/PlantType';
+import { PlantType } from '../types';
 
 export const examplePlants: PlantType[] = [
 	{
 		name: 'kvietocek',
+		image: 'placeholder',
+		lastWater: '2023-03-03',
+		lastFertilize: '2023-03-03',
+		lastRepot: '2023-03-03',
 		nextWater: '2023-05-04',
 		waterInterval: 5,
 		nextRepot: '2023-05-06',
@@ -12,6 +16,10 @@ export const examplePlants: PlantType[] = [
 	},
 	{
 		name: 'muchotravka',
+		image: 'placeholder',
+		lastWater: '2023-03-03',
+		lastFertilize: '2023-03-03',
+		lastRepot: '2023-03-03',
 		nextWater: '2023-05-05',
 		waterInterval: 7,
 		nextRepot: '2023-05-06',
