@@ -9,7 +9,6 @@ import {
 import App from './App.tsx';
 import './index.css';
 import { Home } from './pages/Home.tsx';
-import { About } from './pages/About.tsx';
 import { Plants } from './pages/Plants.tsx';
 import { CalendarPage } from './pages/CalendarPage.tsx';
 import { PlantDetail } from './pages/PlantDetails.tsx';
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
 			{
 				path: '',
 				element: <Home />
-			},
-			{
-				path: 'about',
-				element: <About />
 			},
 			{
 				path: 'plants',
