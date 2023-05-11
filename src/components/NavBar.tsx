@@ -43,7 +43,7 @@ export const NavBar: FC = () => {
 
 	return (
 		<div className="sticky top-0 flex-auto md:max-w-fit flex flex-col max-h-screen z-10">
-			<div className="max-w-full md:max-w-fit bg-emerald-500 md:bg-emerald-00 h-16 flex gap-2 items-center pr-4 justify-between md:justify-normal">
+			<div className="max-w-full md:max-w-fit bg-emerald-500 dark:bg-emerald-700 md:bg-emerald-00 h-16 flex gap-2 items-center pr-4 justify-between md:justify-normal">
 				<FlowerLogo />
 				<h1 className="text-white text-3xl font-extrabold inline truncate">
 					Jungle Diary
@@ -59,18 +59,21 @@ export const NavBar: FC = () => {
 				id="navbar"
 				className={`fixed top-16 ${
 					!isToggled && 'hidden'
-				} md:relative md:top-0 md:block md:h-full md:opacity-100 w-full bg-emerald-400 md:bg-emerald-500 -z-10 pb-8 md:pb-4`}
+				} md:relative md:top-0 md:block md:h-full md:opacity-100 w-full bg-emerald-400 md:bg-emerald-500 dark:bg-emerald-600 dark:md:bg-emerald-700 -z-10 pb-8 md:pb-4`}
 			>
 				<ul className="flex flex-col gap-8 md:gap-3 pt-12 md:pt-6 h-full items-center auto-rows-min">
 					<li className="text-white">
-						<Link to="" className="text-xl md:text-lg hover:text-emerald-400">
+						<Link
+							to=""
+							className="text-xl md:text-lg hover:text-emerald-400 dark:hover:text-emerald-500"
+						>
 							Home
 						</Link>
 					</li>
 					<li className="text-white">
 						<Link
 							to="about"
-							className="text-xl md:text-lg hover:text-emerald-400"
+							className="text-xl md:text-lg hover:text-emerald-400 dark:hover:text-emerald-500"
 						>
 							About
 						</Link>
@@ -78,7 +81,7 @@ export const NavBar: FC = () => {
 					<li className="text-white">
 						<Link
 							to="plants"
-							className="text-xl md:text-lg hover:text-emerald-400"
+							className="text-xl md:text-lg hover:text-emerald-400 dark:hover:text-emerald-500"
 						>
 							Plants
 						</Link>
@@ -86,7 +89,7 @@ export const NavBar: FC = () => {
 					<li className="text-white">
 						<Link
 							to="calendar"
-							className="text-xl md:text-lg hover:text-emerald-400"
+							className="text-xl md:text-lg hover:text-emerald-400 dark:hover:text-emerald-500"
 						>
 							Calendar
 						</Link>
@@ -97,7 +100,7 @@ export const NavBar: FC = () => {
 						<a
 							href=""
 							onClick={() => signOut()}
-							className="text-xl md:text-lg hover:text-emerald-400 self-end"
+							className="text-xl md:text-lg hover:text-emerald-400 self-end dark:hover:text-emerald-500"
 						>
 							Logout
 						</a>
