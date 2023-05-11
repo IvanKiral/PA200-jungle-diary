@@ -8,15 +8,26 @@ import { uploadImage } from '../utils/uploadUtils';
 import { NewPlantFormData } from '../types';
 import { db } from '../firestore';
 import { useUser } from '../hooks/useUser';
+import { defaultToday } from '../utils/dateUtils';
 
 import { InputField } from './InputField';
 
 type NewPlantProps = {
 	setShowModal: (bool: boolean) => void;
+	fetchUserPlants: () => Promise<void>;
 };
 
-export const NewPlantForm: FC<NewPlantProps> = ({ setShowModal }) => {
+export const NewPlantForm: FC<NewPlantProps> = ({
+	setShowModal,
+	fetchUserPlants
+}) => {
+	const today = defaultToday();
+
 	const user = useUser();
+
+	if (!user) {
+		return <p>Unauthorized</p>;
+	}
 	const {
 		register,
 		handleSubmit,
@@ -27,13 +38,14 @@ export const NewPlantForm: FC<NewPlantProps> = ({ setShowModal }) => {
 
 	const onSubmit = async (data: NewPlantFormData) => {
 		try {
-			const imageUrl = await uploadImage(data.image);
+			const imageUrl = await uploadImage(data.image, user);
 			await addDoc(collection(db, 'plants'), {
 				...data,
 				image: imageUrl,
 				userEmail: user?.email
 			});
 			setShowModal(false);
+			await fetchUserPlants();
 		} catch (error) {
 			console.error('Error uploading image or saving document: ', error);
 		}
@@ -82,6 +94,7 @@ export const NewPlantForm: FC<NewPlantProps> = ({ setShowModal }) => {
 										id="lastWatered"
 										labelTitle="Last watered"
 										type="date"
+										defaultValue={today}
 										{...register('lastWater')}
 									/>
 									<p className="text-red-600">{errors.lastWater?.message}</p>
@@ -89,6 +102,7 @@ export const NewPlantForm: FC<NewPlantProps> = ({ setShowModal }) => {
 										id="lastFertilized"
 										labelTitle="Last fertilized"
 										type="date"
+										defaultValue={today}
 										{...register('lastFertilize')}
 									/>
 									<p className="text-red-600">
@@ -98,6 +112,7 @@ export const NewPlantForm: FC<NewPlantProps> = ({ setShowModal }) => {
 										id="lastRepotted"
 										labelTitle="Last repotted"
 										type="date"
+										defaultValue={today}
 										{...register('lastRepot')}
 									/>
 									<p className="text-red-600">{errors.lastRepot?.message}</p>
