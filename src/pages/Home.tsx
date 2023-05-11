@@ -48,7 +48,7 @@ export const Home: FC = () => {
 				</h1>
 			</div>
 
-			<h2 className="text-2xl mt-4">Your plants status:</h2>
+			<h2 className="text-xl mt-4">Your plants status:</h2>
 			<ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
 				<li className="mr-2">
 					<a
