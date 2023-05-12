@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const daysInWeek = [
 	'Monday',
 	'Tuesday',
@@ -23,11 +25,4 @@ export const months = [
 	'December'
 ];
 
-export const defaultToday = () => {
-	const today = new Date();
-	const formattedDate = `${today.getFullYear()}-${String(
-		today.getMonth() + 1
-	).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
-	return formattedDate;
-};
+export const defaultToday = () => dayjs().format('YYYY-MM-DD');
