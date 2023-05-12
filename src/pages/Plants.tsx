@@ -1,4 +1,4 @@
-import { FC, useEffect, useInsertionEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { collection, where, query, onSnapshot } from 'firebase/firestore';
 
 import { PlantCard } from '../components/PlantCard';
