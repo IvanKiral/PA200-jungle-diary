@@ -14,13 +14,9 @@ import { InputField } from './InputField';
 
 type NewPlantFormProps = {
 	setShowModal: (bool: boolean) => void;
-	fetchUserPlants: () => Promise<void>;
 };
 
-export const NewPlantForm: FC<NewPlantFormProps> = ({
-	setShowModal,
-	fetchUserPlants
-}) => {
+export const NewPlantForm: FC<NewPlantFormProps> = ({ setShowModal }) => {
 	const today = defaultToday();
 
 	const user = useUser();
@@ -45,7 +41,6 @@ export const NewPlantForm: FC<NewPlantFormProps> = ({
 				image: imageUrl,
 				userEmail: user?.email
 			});
-			await fetchUserPlants();
 		} catch (error) {
 			console.error('Error uploading image or saving document: ', error);
 		}
