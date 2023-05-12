@@ -39,12 +39,12 @@ export const NewPlantForm: FC<NewPlantFormProps> = ({
 	const onSubmit = async (data: NewPlantFormData) => {
 		try {
 			const imageUrl = await uploadImage(data.image[0], user.email ?? '');
+			setShowModal(false);
 			await addDoc(collection(db, 'plants'), {
 				...data,
 				image: imageUrl,
 				userEmail: user?.email
 			});
-			setShowModal(false);
 			await fetchUserPlants();
 		} catch (error) {
 			console.error('Error uploading image or saving document: ', error);
