@@ -4,7 +4,6 @@ import { collection, where, query, onSnapshot } from 'firebase/firestore';
 import { PlantCard } from '../components/PlantCard';
 import { useUser } from '../hooks/useUser';
 import { PlantType } from '../types/PlantType';
-import { fetchUserPlants } from '../repository/fetchUserPlants';
 import { NewPlantForm } from '../components/NewPlantForm';
 import { db } from '../firestore';
 
@@ -12,13 +11,6 @@ export const Plants: FC = () => {
 	const user = useUser();
 	const [userPlants, setUserPlants] = useState<PlantType[]>([]);
 	const [showModal, setShowModal] = useState(false);
-
-	const getUserPlants = async () => {
-		if (user) {
-			const plants = await fetchUserPlants(user.email as string);
-			setUserPlants(plants);
-		}
-	};
 
 	useEffect(() => {
 		const q = query(
@@ -45,12 +37,7 @@ export const Plants: FC = () => {
 			>
 				Add new plant
 			</button>
-			{showModal ? (
-				<NewPlantForm
-					setShowModal={setShowModal}
-					fetchUserPlants={getUserPlants}
-				/>
-			) : null}
+			{showModal ? <NewPlantForm setShowModal={setShowModal} /> : null}
 			<div className="mx-auto container grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 				{userPlants.map(plant => (
 					<PlantCard plant={plant} key={plant.name} />
