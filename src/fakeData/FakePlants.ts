@@ -1,4 +1,4 @@
-import { PlantType } from '../types';
+import { PlantType } from '../types/PlantType';
 
 export const examplePlants: PlantType[] = [
 	{

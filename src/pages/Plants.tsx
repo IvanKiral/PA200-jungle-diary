@@ -1,10 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useInsertionEffect, useState } from 'react';
+import { collection, where, query, onSnapshot } from 'firebase/firestore';
 
 import { PlantCard } from '../components/PlantCard';
 import { useUser } from '../hooks/useUser';
-import { PlantType } from '../types/index';
+import { PlantType } from '../types/PlantType';
 import { fetchUserPlants } from '../repository/fetchUserPlants';
 import { NewPlantForm } from '../components/NewPlantForm';
+import { db } from '../firestore';
 
 export const Plants: FC = () => {
 	const user = useUser();
@@ -19,7 +21,13 @@ export const Plants: FC = () => {
 	};
 
 	useEffect(() => {
-		getUserPlants();
+		const q = query(
+			collection(db, 'plants'),
+			where('userEmail', '==', user?.email)
+		);
+		onSnapshot(q, snapshot => {
+			setUserPlants(snapshot.docs.map(doc => doc.data()) as PlantType[]);
+		});
 	}, [user]);
 
 	if (!user) {

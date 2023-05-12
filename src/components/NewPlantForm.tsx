@@ -5,19 +5,19 @@ import { addDoc, collection } from 'firebase/firestore';
 
 import { plantSchema } from '../validation/plant';
 import { uploadImage } from '../utils/uploadUtils';
-import { NewPlantFormData } from '../types';
+import { NewPlantFormData } from '../types/NewPlantFormData';
 import { db } from '../firestore';
 import { useUser } from '../hooks/useUser';
 import { defaultToday } from '../utils/dateUtils';
 
 import { InputField } from './InputField';
 
-type NewPlantProps = {
+type NewPlantFormProps = {
 	setShowModal: (bool: boolean) => void;
 	fetchUserPlants: () => Promise<void>;
 };
 
-export const NewPlantForm: FC<NewPlantProps> = ({
+export const NewPlantForm: FC<NewPlantFormProps> = ({
 	setShowModal,
 	fetchUserPlants
 }) => {
@@ -38,7 +38,7 @@ export const NewPlantForm: FC<NewPlantProps> = ({
 
 	const onSubmit = async (data: NewPlantFormData) => {
 		try {
-			const imageUrl = await uploadImage(data.image, user);
+			const imageUrl = await uploadImage(data.image[0], user.email ?? '');
 			await addDoc(collection(db, 'plants'), {
 				...data,
 				image: imageUrl,
