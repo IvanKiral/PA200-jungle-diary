@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import dayjs from 'dayjs';
 
-import { PlantType } from '../types';
+import { PlantType } from '../types/PlantType';
 
 import { TaskFlag } from './TaskFlag';
 
