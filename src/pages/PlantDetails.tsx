@@ -42,7 +42,7 @@ export const PlantDetail: FC = () => {
 
 					<div className="relative overflow-x-auto rounded-md shadow-sm">
 						<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-							<thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+							<thead className="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-600 dark:text-gray-400">
 								<tr>
 									<th scope="col" className="px-6 py-3" />
 									<th scope="col" className="px-6 py-3">
@@ -57,7 +57,7 @@ export const PlantDetail: FC = () => {
 								</tr>
 							</thead>
 							<tbody className="bg-gray-200">
-								<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 whitespace-nowrap">
+								<tr className="bg-white border-b dark:bg-zinc-700 dark:border-gray-800 whitespace-nowrap">
 									<th
 										scope="row"
 										className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -70,7 +70,7 @@ export const PlantDetail: FC = () => {
 										every {plant?.waterInterval} days
 									</td>
 								</tr>
-								<tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 whitespace-nowrap">
+								<tr className="bg-white border-b dark:bg-zinc-700 dark:border-gray-800 whitespace-nowrap">
 									<th
 										scope="row"
 										className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -83,7 +83,7 @@ export const PlantDetail: FC = () => {
 										every {plant?.fertilizeInterval} weeks
 									</td>
 								</tr>
-								<tr className="bg-white dark:bg-gray-800 whitespace-nowrap">
+								<tr className="bg-white dark:bg-zinc-700 whitespace-nowrap">
 									<th
 										scope="row"
 										className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -102,21 +102,21 @@ export const PlantDetail: FC = () => {
 					<div className="buttons py-4 lg:py-8 xl:py-16 flex flex-col items-center justify-center lg:flex-row">
 						<button
 							type="button"
-							className="max-w-fit text-white bg-blue-300 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 whitespace-nowrap"
+							className="max-w-fit text-white bg-blue-300 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-blue-500 dark:hover:bg-blue-600 whitespace-nowrap"
 						>
 							<WaterIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
 							Water me!
 						</button>
 						<button
 							type="button"
-							className="max-w-fit text-white bg-amber-300 hover:bg-amber-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 whitespace-nowrap"
+							className="max-w-fit text-white bg-amber-300 hover:bg-amber-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-amber-500 dark:hover:bg-amber-600 whitespace-nowrap"
 						>
 							<FertilizeIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
 							Fertilize me!
 						</button>
 						<button
 							type="button"
-							className="max-w-fit text-white bg-red-300 hover:bg-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 whitespace-nowrap"
+							className="max-w-fit text-white bg-red-300 hover:bg-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-red-500 dark:hover:bg-red-600 whitespace-nowrap"
 						>
 							<PlantPotIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
 							Repot me!
