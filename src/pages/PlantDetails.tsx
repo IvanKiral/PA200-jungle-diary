@@ -1,12 +1,24 @@
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import { db } from '../firestore';
 import { PlantType } from '../types/PlantType';
 import { WaterIcon } from '../components/icons/WaterIcon';
 import { FertilizeIcon } from '../components/icons/FertilizeIcon';
 import { PlantPotIcon } from '../components/icons/PlantPotIcon';
+
+const updateWater = async (plant: PlantType, plantId: string) => {
+	const nextWaterDate = dayjs()
+		.add(plant.waterInterval, 'days')
+		.format('YYYY-MM-DD');
+
+	await updateDoc(doc(db, 'plants', plantId), {
+		lastWater: dayjs().format('YYYY-MM-DD'),
+		nextWater: nextWaterDate
+	});
+};
 
 export const PlantDetail: FC = () => {
 	const [plant, setPlant] = useState<PlantType>();
@@ -21,6 +33,12 @@ export const PlantDetail: FC = () => {
 			setPlant(doc.data() as PlantType);
 		});
 	}, [plantId]);
+
+	const water = () => {
+		if (plant) {
+			updateWater(plant, plantId);
+		}
+	};
 
 	return (
 		<div className="flex-auto">
@@ -78,7 +96,7 @@ export const PlantDetail: FC = () => {
 										Fertilizing
 									</th>
 									<td className="px-6 py-4">{plant?.lastFertilize}</td>
-									<td className="px-6 py-4">{plant?.nextWater}</td>
+									<td className="px-6 py-4">{plant?.nextFertilize}</td>
 									<td className="px-6 py-4">
 										every {plant?.fertilizeInterval} weeks
 									</td>
@@ -91,7 +109,7 @@ export const PlantDetail: FC = () => {
 										Repotting
 									</th>
 									<td className="px-6 py-4">{plant?.lastRepot}</td>
-									<td className="px-6 py-4">{plant?.nextWater}</td>
+									<td className="px-6 py-4">{plant?.nextRepot}</td>
 									<td className="px-6 py-4">
 										every {plant?.repotInterval} years
 									</td>
@@ -102,6 +120,7 @@ export const PlantDetail: FC = () => {
 					<div className="buttons py-4 lg:py-8 xl:py-16 flex flex-col items-center justify-center lg:flex-row">
 						<button
 							type="button"
+							onClick={() => water()}
 							className="max-w-fit text-white bg-blue-300 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-blue-500 dark:hover:bg-blue-600 whitespace-nowrap"
 						>
 							<WaterIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
