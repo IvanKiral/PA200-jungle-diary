@@ -1,4 +1,4 @@
-import { doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -8,15 +8,32 @@ import { PlantType } from '../types/PlantType';
 import { WaterIcon } from '../components/icons/WaterIcon';
 import { FertilizeIcon } from '../components/icons/FertilizeIcon';
 import { PlantPotIcon } from '../components/icons/PlantPotIcon';
+import { nextDate } from '../utils/dateUtils';
 
 const updateWater = async (plant: PlantType, plantId: string) => {
-	const nextWaterDate = dayjs()
-		.add(plant.waterInterval, 'days')
-		.format('YYYY-MM-DD');
+	const today = dayjs();
 
 	await updateDoc(doc(db, 'plants', plantId), {
-		lastWater: dayjs().format('YYYY-MM-DD'),
-		nextWater: nextWaterDate
+		lastWater: today.format('YYYY-MM-DD'),
+		nextWater: nextDate(today, plant.waterInterval, 'days')
+	});
+};
+
+const updateFertilize = async (plant: PlantType, plantId: string) => {
+	const today = dayjs();
+
+	await updateDoc(doc(db, 'plants', plantId), {
+		lastFertilize: today.format('YYYY-MM-DD'),
+		nextFertilize: nextDate(today, plant.fertilizeInterval, 'days')
+	});
+};
+
+const updateRepot = async (plant: PlantType, plantId: string) => {
+	const today = dayjs();
+
+	await updateDoc(doc(db, 'plants', plantId), {
+		lastRepot: today.format('YYYY-MM-DD'),
+		nextRepot: nextDate(today, plant.repotInterval, 'days')
 	});
 };
 
@@ -34,9 +51,15 @@ export const PlantDetail: FC = () => {
 		});
 	}, [plantId]);
 
-	const water = () => {
+	const updateAction = (action: 'water' | 'fertilize' | 'repot') => {
 		if (plant) {
-			updateWater(plant, plantId);
+			if (action === 'water') {
+				updateWater(plant, plantId);
+			} else if (action === 'fertilize') {
+				updateFertilize(plant, plantId);
+			} else {
+				updateRepot(plant, plantId);
+			}
 		}
 	};
 
@@ -120,7 +143,7 @@ export const PlantDetail: FC = () => {
 					<div className="buttons py-4 lg:py-8 xl:py-16 flex flex-col items-center justify-center lg:flex-row">
 						<button
 							type="button"
-							onClick={() => water()}
+							onClick={() => updateAction('water')}
 							className="max-w-fit text-white bg-blue-300 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-blue-500 dark:hover:bg-blue-600 whitespace-nowrap"
 						>
 							<WaterIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
@@ -128,6 +151,7 @@ export const PlantDetail: FC = () => {
 						</button>
 						<button
 							type="button"
+							onClick={() => updateAction('fertilize')}
 							className="max-w-fit text-white bg-amber-300 hover:bg-amber-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-amber-500 dark:hover:bg-amber-600 whitespace-nowrap"
 						>
 							<FertilizeIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
@@ -135,6 +159,7 @@ export const PlantDetail: FC = () => {
 						</button>
 						<button
 							type="button"
+							onClick={() => updateAction('repot')}
 							className="max-w-fit text-white bg-red-300 hover:bg-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 lg:mb-0 dark:bg-red-500 dark:hover:bg-red-600 whitespace-nowrap"
 						>
 							<PlantPotIcon className="w-5 h-5 fill-white mr-2 -ml-1" />
