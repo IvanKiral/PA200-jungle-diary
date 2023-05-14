@@ -1,6 +1,7 @@
 export type PlantType = {
 	name: string;
 	image: string;
+	imageName: string;
 	lastWater: string;
 	nextWater: string;
 	waterInterval: number;
