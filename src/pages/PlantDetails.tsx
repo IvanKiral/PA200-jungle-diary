@@ -13,30 +13,43 @@ import { nextDate } from '../utils/dateUtils';
 import { DeleteIcon } from '../components/icons/DeleteIcon';
 import { DeleteModal } from '../components/DeleteModal';
 
-const updateWater = async (plant: PlantType, plantId: string) => {
-	const today = dayjs();
+type PlantAction = 'water' | 'fertilize' | 'repot';
 
-	await updateDoc(doc(db, 'plants', plantId), {
-		lastWater: today.format('YYYY-MM-DD'),
-		nextWater: nextDate(today, plant.waterInterval, 'days')
-	});
+type ActionFields = {
+	lastField: keyof PlantType;
+	nextField: keyof PlantType;
+	intervalField: keyof PlantType;
 };
 
-const updateFertilize = async (plant: PlantType, plantId: string) => {
-	const today = dayjs();
-
-	await updateDoc(doc(db, 'plants', plantId), {
-		lastFertilize: today.format('YYYY-MM-DD'),
-		nextFertilize: nextDate(today, plant.fertilizeInterval, 'days')
-	});
+const actionFields: Record<PlantAction, ActionFields> = {
+	water: {
+		lastField: 'lastWater',
+		nextField: 'nextWater',
+		intervalField: 'waterInterval'
+	},
+	fertilize: {
+		lastField: 'lastFertilize',
+		nextField: 'nextFertilize',
+		intervalField: 'fertilizeInterval'
+	},
+	repot: {
+		lastField: 'lastRepot',
+		nextField: 'nextRepot',
+		intervalField: 'repotInterval'
+	}
 };
 
-const updateRepot = async (plant: PlantType, plantId: string) => {
+const updatePlant = async (
+	plant: PlantType,
+	plantId: string,
+	lastField: keyof PlantType,
+	nextField: keyof PlantType,
+	intervalField: keyof PlantType
+) => {
 	const today = dayjs();
-
 	await updateDoc(doc(db, 'plants', plantId), {
-		lastRepot: today.format('YYYY-MM-DD'),
-		nextRepot: nextDate(today, plant.repotInterval, 'days')
+		[lastField]: today.format('YYYY-MM-DD'),
+		[nextField]: nextDate(today, plant[intervalField] as number, 'days')
 	});
 };
 
@@ -60,15 +73,10 @@ export const PlantDetail: FC = () => {
 		});
 	}, [plantId]);
 
-	const updateAction = (action: 'water' | 'fertilize' | 'repot') => {
+	const updateAction = (action: PlantAction) => {
 		if (plant) {
-			if (action === 'water') {
-				updateWater(plant, plantId);
-			} else if (action === 'fertilize') {
-				updateFertilize(plant, plantId);
-			} else {
-				updateRepot(plant, plantId);
-			}
+			const { lastField, nextField, intervalField } = actionFields[action];
+			updatePlant(plant, plantId, lastField, nextField, intervalField);
 		}
 	};
 
