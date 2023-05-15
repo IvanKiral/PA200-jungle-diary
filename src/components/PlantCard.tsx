@@ -10,8 +10,8 @@ type PlantCardProps = {
 };
 
 const formatDate = (date: string) => {
-	const targetDate = dayjs(date);
-	const currentDate = dayjs();
+	const targetDate = dayjs(date).startOf('day');
+	const currentDate = dayjs().startOf('day');
 
 	const daysDiff = targetDate.diff(currentDate, 'day');
 	if (daysDiff < 0) {
