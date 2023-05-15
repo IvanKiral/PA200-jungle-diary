@@ -11,8 +11,8 @@ type PlantCardProps = {
 };
 
 const formatDate = (date: string) => {
-	const targetDate = dayjs(date);
-	const currentDate = dayjs();
+	const targetDate = dayjs(date).startOf('day');
+	const currentDate = dayjs().startOf('day');
 
 	const daysDiff = targetDate.diff(currentDate, 'day');
 	if (daysDiff < 0) {
@@ -36,7 +36,7 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 		className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 z-0"
 	>
 		<div
-			className="relative overflow-hidden bg-cover bg-no-repeat h-52"
+			className="relative overflow-hidden bg-cover bg-no-repeat h-36 sm:h-52"
 			data-te-ripple-init
 			data-te-ripple-color="light"
 		>
@@ -50,7 +50,7 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 			<h5 className="mb-2 text-xl text-center font-medium text-neutral-800 dark:text-neutral-50">
 				{plant.data.name}
 			</h5>
-			<div className="p-5">
+			<div className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-4 md:py-6">
 				<TaskFlag
 					type="water"
 					text={formatDate(plant.data.nextWater)}
