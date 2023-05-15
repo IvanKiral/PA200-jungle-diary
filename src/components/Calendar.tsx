@@ -31,7 +31,7 @@ export const Calendar: FC<CalendarProps> = ({
 	const renderDisabledCalendarWindow = (day: number, month: number) => (
 		<div
 			key={`${month}-${day}`}
-			className="border min-h-[124px] p-1 bg-gray-100 dark:bg-slate-700 cursor-not-allowed"
+			className="border min-h-[124px] p-1 bg-gray-100 cursor-not-allowed"
 		>
 			<p>{day}</p>
 		</div>
@@ -41,7 +41,7 @@ export const Calendar: FC<CalendarProps> = ({
 		<button
 			type="button"
 			onClick={onClick}
-			className="text-emerald-500 border border-emerald-500 hover:bg-emerald-500 dark:text-emerald-700 dark:border-emerald-700 dark:hover:bg-emerald-700 dark:hover:text-white hover:text-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2"
+			className="text-emerald-500 border border-emerald-500 hover:bg-emerald-500 hover:text-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2"
 		>
 			{icon}
 		</button>
@@ -49,8 +49,8 @@ export const Calendar: FC<CalendarProps> = ({
 
 	return (
 		<div className="max-h-min verflow-x-scroll w-full">
-			<div className="flex flex-row w-full">
-				<h1 className="text-3xl">{`${
+			<div className="flex flex-row w-full pb-4">
+				<h1 className="font-semibold text-4xl">{`${
 					months[selectedDate.month()]
 				} ${selectedDate.year()}`}</h1>
 
@@ -91,21 +91,21 @@ export const Calendar: FC<CalendarProps> = ({
 						<div className="pt-1">
 							{tasks.water.map(plantName => (
 								<TaskFlag
-									key={`water-${plantName}-${day}`}
+									key={`${plantName}-${day}`}
 									type="water"
 									text={plantName}
 								/>
 							))}
 							{tasks.repot.map(plantName => (
 								<TaskFlag
-									key={`repot-${plantName}-${day}`}
+									key={`${plantName}-${day}`}
 									type="repot"
 									text={plantName}
 								/>
 							))}
 							{tasks.fertilize.map(plantName => (
 								<TaskFlag
-									key={`fertilize-${plantName}-${day}`}
+									key={`${plantName}-${day}`}
 									type="fertilize"
 									text={plantName}
 								/>
