@@ -34,11 +34,12 @@ export const NewPlantForm: FC<NewPlantFormProps> = ({ setShowModal }) => {
 
 	const onSubmit = async (data: NewPlantFormData) => {
 		try {
-			const imageUrl = await uploadImage(data.image[0], user.email ?? '');
+			const { url, name } = await uploadImage(data.image[0], user.email ?? '');
 			setShowModal(false);
 			await addDoc(collection(db, 'plants'), {
 				...data,
-				image: imageUrl,
+				image: url,
+				imageName: name,
 				userEmail: user?.email
 			});
 		} catch (error) {

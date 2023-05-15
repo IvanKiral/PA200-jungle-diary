@@ -6,10 +6,10 @@ export const uploadImage = async (file: File, userEmail: string) => {
 	if (!file) {
 		throw new Error('No file provided');
 	}
-
-	const storageRef = ref(storage, `${userEmail}/${Date.now()}-${file.name}`);
+	const imageName = `${userEmail}/${Date.now()}-${file.name}`;
+	const storageRef = ref(storage, imageName);
 	await uploadBytes(storageRef, file);
 
 	const downloadURL = await getDownloadURL(storageRef);
-	return downloadURL;
+	return { url: downloadURL, name: imageName };
 };

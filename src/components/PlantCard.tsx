@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
-import { PlantType } from '../types/PlantType';
+import { PlantDocType } from '../types/PlantDocType';
 
 import { TaskFlag } from './TaskFlag';
 
 type PlantCardProps = {
-	plant: PlantType;
+	plant: PlantDocType;
 };
 
 const formatDate = (date: string) => {
@@ -31,7 +32,7 @@ const formatDate = (date: string) => {
 
 export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 	<div
-		key={plant.name}
+		key={plant.id}
 		className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 z-0"
 	>
 		<div
@@ -41,39 +42,41 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 		>
 			<img
 				className="rounded-t-lg object-cover h-full w-full"
-				src={plant.image}
+				src={plant.data.image}
 				alt=""
 			/>
 		</div>
 		<div className="p-6 flex flex-col content-center justify-center">
-			<h5 className="sm:mb-2 text-xl text-center font-medium text-neutral-800 dark:text-neutral-50 h-12">
-				{plant.name}
+			<h5 className="mb-2 text-xl text-center font-medium text-neutral-800 dark:text-neutral-50">
+				{plant.data.name}
 			</h5>
 			<div className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-4 md:py-6">
 				<TaskFlag
 					type="water"
-					text={formatDate(plant.nextWater)}
+					text={formatDate(plant.data.nextWater)}
 					extraClasses="flex justify-center text-center"
 				/>
 				<TaskFlag
 					type="fertilize"
-					text={formatDate(plant.nextFertilize)}
+					text={formatDate(plant.data.nextFertilize)}
 					extraClasses="flex justify-center text-center"
 				/>
 				<TaskFlag
 					type="repot"
-					text={formatDate(plant.nextRepot)}
+					text={formatDate(plant.data.nextRepot)}
 					extraClasses="flex justify-center text-center"
 				/>
 			</div>
-			<button
-				type="button"
-				className="inline-block rounded text-white bg-emerald-500 dark:bg-emerald-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] 	dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-				data-te-ripple-init
-				data-te-ripple-color="light"
-			>
-				View details
-			</button>
+			<Link to={plant.id}>
+				<button
+					type="button"
+					className="inline-block rounded text-white bg-emerald-500 dark:bg-emerald-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+					data-te-ripple-init
+					data-te-ripple-color="light"
+				>
+					View details
+				</button>
+			</Link>
 		</div>
 	</div>
 );

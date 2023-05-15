@@ -4,6 +4,7 @@ export const examplePlants: PlantType[] = [
 	{
 		name: 'kvietocek',
 		image: 'placeholder',
+		imageName: 'xxx',
 		lastWater: '2023-03-03',
 		lastFertilize: '2023-03-03',
 		lastRepot: '2023-03-03',
@@ -17,6 +18,7 @@ export const examplePlants: PlantType[] = [
 	{
 		name: 'muchotravka',
 		image: 'placeholder',
+		imageName: 'xxx',
 		lastWater: '2023-03-03',
 		lastFertilize: '2023-03-03',
 		lastRepot: '2023-03-03',

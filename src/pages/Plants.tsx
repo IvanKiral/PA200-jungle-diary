@@ -6,10 +6,11 @@ import { useUser } from '../hooks/useUser';
 import { PlantType } from '../types/PlantType';
 import { NewPlantForm } from '../components/NewPlantForm';
 import { db } from '../firestore';
+import { PlantDocType } from '../types/PlantDocType';
 
 export const Plants: FC = () => {
 	const user = useUser();
-	const [userPlants, setUserPlants] = useState<PlantType[]>([]);
+	const [userPlants, setUserPlants] = useState<PlantDocType[]>([]);
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
@@ -18,7 +19,12 @@ export const Plants: FC = () => {
 			where('userEmail', '==', user?.email)
 		);
 		onSnapshot(q, snapshot => {
-			setUserPlants(snapshot.docs.map(doc => doc.data()) as PlantType[]);
+			setUserPlants(
+				snapshot.docs.map(doc => ({
+					id: doc.id,
+					data: doc.data() as PlantType
+				}))
+			);
 		});
 	}, [user]);
 
@@ -40,7 +46,7 @@ export const Plants: FC = () => {
 			{showModal ? <NewPlantForm setShowModal={setShowModal} /> : null}
 			<div className="mx-auto container grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 				{userPlants.map(plant => (
-					<PlantCard plant={plant} key={plant.name} />
+					<PlantCard plant={plant} key={plant.id} />
 				))}
 			</div>
 		</div>
