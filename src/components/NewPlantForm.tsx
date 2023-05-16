@@ -2,13 +2,14 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addDoc, collection } from 'firebase/firestore';
+import dayjs from 'dayjs';
 
 import { plantSchema } from '../validation/plant';
 import { uploadImage } from '../utils/uploadUtils';
 import { NewPlantFormData } from '../types/NewPlantFormData';
 import { db } from '../firestore';
 import { useUser } from '../hooks/useUser';
-import { defaultToday } from '../utils/dateUtils';
+import { defaultToday, nextDate } from '../utils/dateUtils';
 
 import { InputField } from './InputField';
 
@@ -33,13 +34,24 @@ export const NewPlantForm: FC<NewPlantFormProps> = ({ setShowModal }) => {
 	});
 
 	const onSubmit = async (data: NewPlantFormData) => {
+		const fertilizeIntervalDays = data.fertilizeInterval * 7;
+		const repotIntervalDays = data.repotInterval * 365;
+
 		try {
 			const { url, name } = await uploadImage(data.image[0], user.email ?? '');
 			setShowModal(false);
 			await addDoc(collection(db, 'plants'), {
 				...data,
+				fertilizeInterval: fertilizeIntervalDays,
+				repotInterval: repotIntervalDays,
 				image: url,
 				imageName: name,
+				nextWater: nextDate(dayjs(data.lastWater), data.waterInterval),
+				nextFertilize: nextDate(
+					dayjs(data.lastFertilize),
+					fertilizeIntervalDays
+				),
+				nextRepot: nextDate(dayjs(data.lastRepot), repotIntervalDays),
 				userEmail: user?.email
 			});
 		} catch (error) {

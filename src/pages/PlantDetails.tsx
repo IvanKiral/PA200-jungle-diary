@@ -44,7 +44,7 @@ const updatePlant = async (
 	const today = dayjs();
 	await updateDoc(doc(db, 'plants', plantId), {
 		[lastField]: today.format('YYYY-MM-DD'),
-		[nextField]: nextDate(today, plant[intervalField] as number, 'days')
+		[nextField]: nextDate(today, plant[intervalField] as number)
 	});
 };
 

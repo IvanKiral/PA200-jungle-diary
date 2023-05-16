@@ -27,5 +27,5 @@ export const months = [
 
 export const defaultToday = () => dayjs().format('YYYY-MM-DD');
 
-export const nextDate = (date: Dayjs, interval: number, unit: ManipulateType) =>
-	dayjs(date).add(interval, unit).format('YYYY-MM-DD');
+export const nextDate = (date: Dayjs, interval: number) =>
+	dayjs(date).add(interval, 'days').format('YYYY-MM-DD');

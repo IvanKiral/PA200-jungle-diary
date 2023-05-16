@@ -38,7 +38,7 @@ export const Home: FC = () => {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="flex gap-4 items-center">
-				<h1 className="text-3xl">
+				<h1 className="font-semibold text-4xl">
 					Welcome{' '}
 					<span className="text-emerald-500 dark:text-emerald-700">
 						{user?.email}
