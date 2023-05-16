@@ -83,7 +83,7 @@ export const Home: FC = () => {
 				</li>
 			</ul>
 
-			<div className="grid  grid-cols-2 lg:grid-cols-4 gap-8">
+			<div className="grid  grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-8">
 				{userPlants.map(p => (
 					<PlantCard key={p.id} plant={p} />
 				))}
