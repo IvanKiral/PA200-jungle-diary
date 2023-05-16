@@ -24,7 +24,10 @@ export const fetchUserPlantsWithOrdering = async (
 	);
 
 	const querySnapshot = await getDocs(q);
-	const plantData = querySnapshot.docs.map(doc => doc.data() as PlantType);
+	const plantData = querySnapshot.docs.map(doc => ({
+		id: doc.id,
+		data: doc.data() as PlantType
+	}));
 
 	return plantData;
 };
