@@ -43,7 +43,9 @@ export const PlantInfoTable: FC<PlantInfoTableProps> = ({ plant }) => (
 				</th>
 				<td className="px-6 py-4">{plant?.lastFertilize}</td>
 				<td className="px-6 py-4">{plant?.nextFertilize}</td>
-				<td className="px-6 py-4">every {plant?.fertilizeInterval} weeks</td>
+				<td className="px-6 py-4">
+					every {plant?.fertilizeInterval / 7} weeks
+				</td>
 			</tr>
 			<tr className="bg-white dark:bg-zinc-700 whitespace-nowrap">
 				<th
@@ -54,7 +56,7 @@ export const PlantInfoTable: FC<PlantInfoTableProps> = ({ plant }) => (
 				</th>
 				<td className="px-6 py-4">{plant?.lastRepot}</td>
 				<td className="px-6 py-4">{plant?.nextRepot}</td>
-				<td className="px-6 py-4">every {plant?.repotInterval} years</td>
+				<td className="px-6 py-4">every {plant?.repotInterval / 365} years</td>
 			</tr>
 		</tbody>
 	</table>
