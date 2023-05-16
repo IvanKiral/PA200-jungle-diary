@@ -2,18 +2,17 @@ import { FC, useEffect, useState } from 'react';
 
 import { useUser } from '../hooks/useUser';
 import { PlantCard } from '../components/PlantCard';
-import { PlantType } from '../types/PlantType';
 import {
 	PlantsOrderBy,
 	fetchUserPlantsWithOrdering
 } from '../repository/fetchUserPlantsWithOrdering';
-
-type HomeTabs = 'water' | 'fertilize' | 'repot';
+import { PlantAction } from '../types/PlantAction';
+import { PlantDocType } from '../types/PlantDocType';
 
 export const Home: FC = () => {
 	const user = useUser();
-	const [tab, setTab] = useState<HomeTabs>('water');
-	const [userPlants, setUserPlants] = useState<PlantType[]>([]);
+	const [tab, setTab] = useState<PlantAction>('water');
+	const [userPlants, setUserPlants] = useState<PlantDocType[]>([]);
 
 	useEffect(() => {
 		let orderParameter: PlantsOrderBy = 'nextWater';
@@ -86,7 +85,7 @@ export const Home: FC = () => {
 
 			<div className="grid  grid-cols-2 lg:grid-cols-4 gap-8">
 				{userPlants.map(p => (
-					<PlantCard key={p.name} plant={p} />
+					<PlantCard key={p.id} plant={p} />
 				))}
 			</div>
 		</div>
