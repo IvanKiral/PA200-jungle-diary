@@ -1,4 +1,4 @@
-import dayjs, { Dayjs, ManipulateType } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 export const daysInWeek = [
 	'Monday',
