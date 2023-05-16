@@ -50,7 +50,7 @@ export const Calendar: FC<CalendarProps> = ({
 	return (
 		<div className="max-h-min verflow-x-scroll w-full">
 			<div className="flex flex-row w-full">
-				<h1 className="text-3xl">{`${
+				<h1 className="font-semibold text-4xl">{`${
 					months[selectedDate.month()]
 				} ${selectedDate.year()}`}</h1>
 
