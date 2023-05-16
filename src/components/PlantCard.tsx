@@ -47,7 +47,7 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 			/>
 		</div>
 		<div className="p-6 flex flex-col content-center justify-center">
-			<h5 className="mb-2 text-xl text-center font-medium text-neutral-800 dark:text-neutral-50">
+			<h5 className="mb-2 text-xl text-center font-medium text-neutral-800 dark:text-neutral-50 truncate">
 				{plant.data.name}
 			</h5>
 			<div className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-4 md:py-6">
@@ -67,7 +67,7 @@ export const PlantCard: FC<PlantCardProps> = ({ plant }) => (
 					extraClasses="flex justify-center text-center"
 				/>
 			</div>
-			<Link to={plant.id}>
+			<Link className="flex justify-center" to={`/plants/${plant.id}`}>
 				<button
 					type="button"
 					className="inline-block rounded text-white bg-emerald-500 dark:bg-emerald-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
