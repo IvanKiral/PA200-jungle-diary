@@ -28,4 +28,9 @@ Jungle Diary is an easy-to-use app designed to help you keep your plants healthy
   - https://day.js.org/
 - React Router
   - https://reactrouter.com/en/main
-- ...
+- React Hook Form
+  - https://react-hook-form.com/
+- Zod
+  - https://zod.dev/
+- Google Icons
+  - https://fonts.google.com/icons
