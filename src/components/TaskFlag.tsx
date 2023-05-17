@@ -19,7 +19,7 @@ export const TaskFlag: FC<TaskFlagProps> = props => {
 	} else if (props.type === 'fertilize') {
 		styles = 'bg-amber-200 text-yellow-700';
 		icon = (
-			<FertilizeIcon className="w-5 h-5 text-yellow-700 overflow-visible" />
+			<FertilizeIcon className="w-5 h-5 fill-yellow-700 overflow-visible" />
 		);
 	}
 	return (
