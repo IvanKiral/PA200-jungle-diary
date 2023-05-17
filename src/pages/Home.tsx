@@ -52,7 +52,7 @@ export const Home: FC = () => {
 					<a
 						href="#water"
 						onClick={() => setTab('water')}
-						className={`inline-block p-4 text-emerald-500 ${
+						className={`inline-block p-4 text-emerald-500 rounded-t-md ${
 							tab === 'water' && 'bg-gray-100 dark:bg-neutral-700'
 						} dark:text-emerald-700`}
 					>
@@ -63,7 +63,7 @@ export const Home: FC = () => {
 					<a
 						href="#fertilize"
 						onClick={() => setTab('fertilize')}
-						className={`inline-block p-4 text-emerald-500 ${
+						className={`inline-block p-4 text-emerald-500 rounded-t-md ${
 							tab === 'fertilize' && 'bg-gray-100 dark:bg-neutral-700'
 						} dark:text-emerald-700`}
 					>
@@ -74,7 +74,7 @@ export const Home: FC = () => {
 					<a
 						href="#repot"
 						onClick={() => setTab('repot')}
-						className={`inline-block p-4 text-emerald-500 ${
+						className={`inline-block p-4 text-emerald-500 rounded-t-md ${
 							tab === 'repot' && 'bg-gray-100 dark:bg-neutral-700'
 						} dark:text-emerald-700`}
 					>
