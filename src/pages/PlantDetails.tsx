@@ -49,7 +49,9 @@ const updatePlant = async (
 };
 
 const deletePlant = async (plant: PlantType, plantId: string) => {
-	deleteObject(ref(storage, plant.imageName));
+	if (plant.image !== 'default-placeholder.png') {
+		await deleteObject(ref(storage, plant.imageName));
+	}
 	await deleteDoc(doc(db, 'plants', plantId));
 };
 
