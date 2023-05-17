@@ -36,7 +36,7 @@ export const Home: FC = () => {
 	}, [tab]);
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 pb-4">
 			<div className="flex gap-4 items-center">
 				<h1 className="font-semibold text-4xl">
 					Welcome{' '}
@@ -83,7 +83,7 @@ export const Home: FC = () => {
 				</li>
 			</ul>
 
-			<div className="grid  grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-8">
+			<div className="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4">
 				{userPlants.map(p => (
 					<PlantCard key={p.id} plant={p} />
 				))}
