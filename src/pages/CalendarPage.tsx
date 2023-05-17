@@ -22,7 +22,7 @@ export const CalendarPage: FC = () => {
 	}, [user]);
 
 	return (
-		<div className="w-full pb-4">
+		<div className="w-full pb-4 overflow-x-scroll">
 			<Calendar
 				selectedDate={selectedDate}
 				setSelectedDate={date => setSelectedDate(date)}
