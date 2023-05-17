@@ -34,7 +34,7 @@ export const Plants: FC = () => {
 	}
 
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col pb-4">
 			<div className="flex flex-row justify-between items-center pb-4">
 				<h1 className="font-semibold text-4xl">Plants</h1>
 				<PlantButton text="Add new plant" onClick={() => setShowModal(true)} />
