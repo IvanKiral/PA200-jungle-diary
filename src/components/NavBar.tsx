@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { signOut } from '../firestore';
 
@@ -41,6 +41,7 @@ const MenuIcon: FC<MenuIconProps> = ({ isToggled, setIsToggled }) => (
 
 export const NavBar: FC = () => {
 	const [isToggled, setIsToggled] = useState<boolean>(false);
+	const navigate = useNavigate();
 
 	return (
 		<div className="sticky top-0 flex-auto md:max-w-fit flex flex-col max-h-screen z-10">
@@ -92,7 +93,10 @@ export const NavBar: FC = () => {
 					<li className="text-white ">
 						<a
 							href=""
-							onClick={() => signOut()}
+							onClick={() => {
+								signOut();
+								navigate('/login');
+							}}
 							className="text-xl md:text-lg hover:text-emerald-400 self-end dark:hover:text-emerald-500"
 						>
 							Logout
